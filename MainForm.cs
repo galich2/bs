@@ -34,7 +34,11 @@ namespace Морской_Бой
                 new Program.Точка(2,2),
                 new Program.Точка(2,3),
             });
-            sea.Выстрел(new Program.Точка(0,1));
+            sea.Выстрел(new Program.Точка(0, 1));
+            sea.Выстрел(new Program.Точка(0, 2));
+            sea.Выстрел(new Program.Точка(0, 3));
+            sea.Выстрел(new Program.Точка(0, 4));
+            sea.Выстрел(new Program.Точка(0, 5));
             ShowSea();
             ShowFight();
         }

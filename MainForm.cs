@@ -15,7 +15,11 @@ namespace Морской_Бой
         Море sea_user = new Море();
         Море sea_comp = new Море();
         static string abc = "АБВГДЕЖЗИК";
-        Color Color_back = Color.DarkSeaGreen;
+        Color color_back = Color.DarkSeaGreen;
+        Color[] color_ship = {Color.DarkOrange, 
+            Color.DarkMagenta, Color.DarkMagenta,
+            Color.DarkKhaki, Color.DarkKhaki, Color.DarkKhaki,
+            Color.DarkRed, Color.DarkRed, Color.DarkRed, Color.DarkRed};
         public MainForm()
         {
             InitializeComponent();
@@ -29,16 +33,33 @@ namespace Морской_Бой
         {
             grid.Rows.Clear();
             grid.Columns.Clear();
-            grid.DefaultCellStyle.BackColor = Color_back;
+            grid.DefaultCellStyle.BackColor = color_back;
             for (int x = 0; x < Море.Размер_моря.x; x++)  
                 grid.Columns.Add("col_" + x.ToString(), abc.Substring(x, 1));
-            for (int y = 0; y < Море.Размер_моря.x; y++)
+            for (int y = 0; y < Море.Размер_моря.y; y++)
             {
                 grid.Rows.Add();
                 grid.Rows[y].HeaderCell.Value = (y + 1).ToString();
             }
             grid.Height = Море.Размер_моря.y * grid.Rows[0].Height + grid.ColumnHeadersHeight + 2;
+            grid.ClearSelection();
         }
-       
+        private void ShowShips(DataGridView grid, Море sea)
+        {
+            for (int x = 0; x < Море.Размер_моря.x; x++)
+                for (int y = 0; y < Море.Размер_моря.y; y++)
+                {
+                    int nr = sea.КартаКораблей(new Program.Точка(x, y));
+                    if (nr < 0)
+                        grid[x, y].Style.BackColor = color_back;
+                    else
+                        grid[x, y].Style.BackColor = color_ship[nr];
+                }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowShips(grid_user, sea_user);
+        }
     }
 }

@@ -12,8 +12,8 @@ namespace Морской_Бой
 {
     public partial class MainForm : Form
     {
-        Море sea_user = new Море();
-        Море sea_comp = new Море();
+        Редактор sea_user;
+        Редактор sea_comp;
         static string abc = "АБВГДЕЖЗИК";
         Color color_back = Color.DarkSeaGreen;
         Color[] color_ship = {Color.DarkOrange, 
@@ -23,8 +23,8 @@ namespace Морской_Бой
         public MainForm()
         {
             InitializeComponent();
-            sea_user = new Море();
-            sea_comp = new Море();
+            sea_user = new Редактор();
+            sea_comp = new Редактор();
             InitGrid(grid_user);
             InitGrid(grid_comp);
 
@@ -59,7 +59,16 @@ namespace Морской_Бой
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //sea_user.ПоставитьРовно();
+            sea_user.ПоставитьРовно();
             ShowShips(grid_user, sea_user);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            sea_user.ПоставитьСлучайно();
+            ShowShips(grid_user, sea_user);
+        }
+
     }
 }

@@ -19,73 +19,60 @@ namespace Морской_Бой
             ПоставитьКорабль(0,
                 new Program.Точка[]
                 { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
+                  new Program.Точка(2, 1),
+                  new Program.Точка(3, 1),
+                  new Program.Точка(4, 1)}
                 );
             ПоставитьКорабль(1,
                 new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
+                { new Program.Точка(1, 3),
+                  new Program.Точка(2, 3),
+                  new Program.Точка(3, 3) }
                 );
             ПоставитьКорабль(2,
                 new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
+                { new Program.Точка(5, 3),
+                  new Program.Точка(6, 3),
+                  new Program.Точка(7, 3)}
                 );
             ПоставитьКорабль(3,
                 new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
+                { new Program.Точка(1, 5),
+                  new Program.Точка(2, 5)}
                 );
             ПоставитьКорабль(4,
                 new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
+                { new Program.Точка(4, 5),
+                  new Program.Точка(5, 5)}
                 );
             ПоставитьКорабль(5,
                 new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
+                { new Program.Точка(7, 5),
+                  new Program.Точка(8, 5)}
                 );
-            ПоставитьКорабль(6,
-                new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
-                );
-            ПоставитьКорабль(7,
-                new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
-                );
-            ПоставитьКорабль(8,
-                new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
-                );
-            ПоставитьКорабль(9,
-                new Program.Точка[]
-                { new Program.Точка(1, 1),
-                  new Program.Точка(1, 2),
-                  new Program.Точка(1, 3),
-                  new Program.Точка(1, 4)}
-                );
+            for (int номер = 6; номер < Всего_кораблей; номер++)
+            {
+                ПоставитьКорабль(номер, new Program.Точка[] {new Program.Точка((номер - 5)*2 - 1, 7)});
+            }
+            return true;
+        }
+        public bool ПоставитьСлучайно(int номер)
+        {
+            int длина = длина_кораблей[номер];
+            Program.Точка нос;
+            Program.Точка шаг;
+            if (rand.Next(2) == 0)
+            {
+                нос = new Program.Точка(rand.Next(0, Размер_моря.x - длина + 1), rand.Next(0, Размер_моря.y));
+                шаг = new Program.Точка(1, 0);
+            }
+            else
+            {
+                нос = new Program.Точка(rand.Next(0, Размер_моря.x), rand.Next(0, Размер_моря.y - длина + 1));
+                шаг = new Program.Точка(0, 1);
+            }
+            Program.Точка[] палуба = new Program.Точка[длина];
+
             return true;
         }
     }

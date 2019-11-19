@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_user = new System.Windows.Forms.DataGridView();
             this.grid_comp = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_user)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid_comp)).BeginInit();
             this.SuspendLayout();
@@ -89,11 +90,22 @@
             this.grid_comp.Size = new System.Drawing.Size(266, 279);
             this.grid_comp.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(89, 342);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 353);
+            this.ClientSize = new System.Drawing.Size(565, 389);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.grid_comp);
             this.Controls.Add(this.grid_user);
             this.Name = "MainForm";
@@ -109,6 +121,7 @@
 
         private System.Windows.Forms.DataGridView grid_user;
         private System.Windows.Forms.DataGridView grid_comp;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -15,7 +15,7 @@ namespace Морской_Бой
         public int Расставлено { get; protected set; }
         public int Убито { get; protected set; }
         protected Корабль[] корабль;
-
+        public int создано { get; protected set; }
         public Море()
         {
             Карта_кораблей = new int[Размер_моря.x, Размер_моря.y];

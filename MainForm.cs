@@ -59,15 +59,24 @@ namespace Морской_Бой
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //sea_user.ПоставитьРовно();
+            sea_user.Сброс();
             sea_user.ПоставитьРовно();
             ShowShips(grid_user, sea_user);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Море.Всего_кораблей; i++)
-            sea_user.ПоставитьСлучайно(i);
+            sea_user.Сброс();
+            int loop = 100;
+            while (--loop > 0 && sea_user.создано < Море.Всего_кораблей)
+            {
+                for (int i = 0; i < Море.Всего_кораблей; i++)
+                    if (sea_user.НетКорабля(i))
+                        sea_user.ПоставитьСлучайно(i);
+            loop--;
+            }
+            //if (sea_user.создано < Море.Всего_кораблей)
+            //    sea_user.Сброс();
             ShowShips(grid_user, sea_user);
         }
 

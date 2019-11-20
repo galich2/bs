@@ -18,8 +18,8 @@ namespace Морской_Бой
         Color color_back = Color.DarkSeaGreen;
         Color[] color_ship = {Color.DarkOrange, 
             Color.DarkMagenta, Color.DarkMagenta,
-            Color.DarkKhaki, Color.DarkKhaki, Color.DarkKhaki,
-            Color.DarkRed, Color.DarkRed, Color.DarkRed, Color.DarkRed};
+            Color.Black, Color.Black, Color.Black,
+            Color.Red, Color.Red, Color.Red, Color.Red};
         public MainForm()
         {
             InitializeComponent();
@@ -66,7 +66,8 @@ namespace Морской_Бой
 
         private void button2_Click(object sender, EventArgs e)
         {
-            sea_user.ПоставитьСлучайно();
+            for (int i = 0; i < Море.Всего_кораблей; i++)
+            sea_user.ПоставитьСлучайно(i);
             ShowShips(grid_user, sea_user);
         }
 

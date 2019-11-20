@@ -56,6 +56,20 @@ namespace Морской_Бой
             }
             return true;
         }
+        protected void ОчиститьОбласть(Program.Точка t)
+        {
+            Program.Точка p;
+            for (p.x = t.x - 1; p.x <= t.x + 1; p.x++)
+                for (p.y = t.y - 1; p.y <= t.y + 1; p.y++)
+                    ОчиститьТочку(p);
+        }
+
+        protected void ОчиститьТочку(Program.Точка t)
+        {
+            if (!НаМоре(t)) return;
+            if (Карта_кораблей[t.x, t.y] == -1)
+                УбратьКорабль(Карта_кораблей[t.x, t.y]);
+        }
         public bool ПоставитьСлучайно(int номер)
         {
             int длина = длина_кораблей[номер];
@@ -72,7 +86,13 @@ namespace Морской_Бой
                 шаг = new Program.Точка(0, 1);
             }
             Program.Точка[] палуба = new Program.Точка[длина];
-
+            for (int j = 0; j < длина; j++)
+            {
+                палуба[j] = new Program.Точка(нос.x + j * шаг.x, нос.y + j * шаг.y);
+                ОчиститьОбласть(палуба[j]);
+            }
+            ПоставитьКорабль(номер, палуба);
+            
             return true;
         }
     }

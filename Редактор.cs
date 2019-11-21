@@ -56,6 +56,60 @@ namespace Морской_Бой
             }
             return true;
         }
+        public void Сброс()
+        {
+            for (int x = 0; x < Размер_моря.x; x++)
+            {
+                for (int y = 0; y < Размер_моря.y; y++)
+                {
+                    Карта_кораблей[x, y] = -1;
+                    ShowShip(new Program.Точка(x, y), -1);
+                    Карта_попаданий[x, y] = Program.Статус.Неизвестно;
+                    ShowFight(new Program.Точка(x, y), Program.Статус.Неизвестно);
+                }
+            }
+            for (int i = 0; i < Всего_кораблей; i++)
+            {
+                корабль[i] = null;
+                Расставлено = 0;
+                Убито = 0;
+            }
+        }
+        public void ПоставитьКорабль(int Номер, Program.Точка[] Палуба)
+        {
+            if (корабль[Номер] != null)
+                УбратьКорабль(Номер);
+            корабль[Номер] = new Корабль(Палуба);
+            foreach (Program.Точка t in Палуба)
+            {
+                Карта_кораблей[t.x, t.y] = Номер;
+                ShowShip(t, Номер);
+            }
+                Расставлено++;
+        }
+        public void УбратьКорабль(int Номер)
+        {
+            foreach (Program.Точка t in корабль[Номер].Палуба)
+            {
+                Карта_кораблей[t.x, t.y] = -1;
+                ShowShip(t, -1);
+            }
+            корабль[Номер] = null;
+                Расставлено--;
+            
+        }
+        public bool НетКорабля(int Номер)
+        {
+            return корабль[Номер] == null;
+        }
+        public int КартаКораблей(Program.Точка t)
+        {
+            if (НаМоре(t))
+            {
+                return Карта_кораблей[t.x, t.y];
+            }
+            return -1;
+        }
         protected void ОчиститьОбласть(Program.Точка t)
         {
             Program.Точка p;

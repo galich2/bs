@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Морской_Бой
 {
-    static class Program
+    static public class Program
     {
         public enum Статус
         {

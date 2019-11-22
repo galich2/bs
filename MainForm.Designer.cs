@@ -64,6 +64,8 @@
             this.grid_user.ShowEditingIcon = false;
             this.grid_user.Size = new System.Drawing.Size(266, 279);
             this.grid_user.TabIndex = 0;
+            this.grid_user.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_user_KeyDown);
+            this.grid_user.MouseUp += new System.Windows.Forms.MouseEventHandler(this.grid_user_MouseUp);
             // 
             // grid_comp
             // 

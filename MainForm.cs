@@ -42,7 +42,9 @@ namespace Морской_Бой
             sea_comp.ShowFight = ShowCompFight;
             InitGrid(grid_user);
             InitGrid(grid_comp);
-
+            sea_user.Сброс();
+            sea_comp.Сброс();
+            sea_comp.ПоставитьРовно();
         }
       private void InitGrid(DataGridView grid)
         {
@@ -127,6 +129,43 @@ namespace Морской_Бой
         private void ShowCompFight(Program.Точка place, Program.Статус status)
         {
             ShowFight(grid_comp, place, status);
+        }
+
+        private void grid_user_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                PlaceShip();
+        }
+        private void PlaceShip()
+        {
+            if (grid_user.SelectedCells.Count == 0)
+                return;
+            //if (grid_user.SelectedCells.Count > 4)
+            //    return;
+            Program.Точка[] ship = new Program.Точка[grid_user.SelectedCells.Count];
+            int j = 0;
+            foreach(DataGridViewCell cell in grid_user.SelectedCells)
+                ship[j++] = new Program.Точка(cell.ColumnIndex, cell.RowIndex);
+            if(ship.Length == 1)
+                sea_user.ОчиститьТочку(ship[0]);
+            sea_user.ПоставитьПоТочкам(ship);
+            grid_user.ClearSelection();
+            ShowUnPlacedShips();
+        }
+        private void ShowUnPlacedShips()
+        {
+            sea_comp.ПоставитьРовно();
+            for (int j = 0; j < Море.Всего_кораблей; j++)
+            {
+                if (!sea_user.НетКорабля(j))
+                    sea_comp.УбратьКорабль(j);
+            }
+        }
+
+        private void grid_user_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                PlaceShip();
         }
     }
 }

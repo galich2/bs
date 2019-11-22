@@ -16,6 +16,7 @@ namespace Морской_Бой
         }
         public bool ПоставитьРовно()
         {
+            Сброс();
             ПоставитьКорабль(0,
                 new Program.Точка[]
                 { new Program.Точка(1, 1),
@@ -75,6 +76,48 @@ namespace Морской_Бой
                 Убито = 0;
             }
         }
+        public bool ПоставитьПоТочкам(Program.Точка[] палуба)
+        {
+            int длина = палуба.Length;
+            int номер = НайтиНомер(длина);
+            if (номер < 0)
+                return false;
+            Program.Точка лв = палуба[0];
+            Program.Точка пн = палуба[0];
+            for (int j = 0; j < длина; j++)
+            {
+                лв.x = Math.Min(лв.x, палуба[j].x);
+                лв.y = Math.Min(лв.y, палуба[j].y);
+                пн.x = Math.Max(пн.x, палуба[j].x);
+                пн.y = Math.Max(пн.y, палуба[j].y);
+            }
+            if (лв.x == пн.x)
+            {
+                if (пн.y - лв.y + 1 != длина)
+                    return false;
+            }
+            else
+            if (лв.y == пн.y)
+            {
+                if (пн.x - лв.x + 1 != длина)
+                    return false;
+            }
+            else
+                return false;
+            for (int j = 0; j < длина; j++)
+                ОчиститьОбласть(палуба[j]);
+            ПоставитьКорабль(номер, палуба);
+            return true;
+        }
+        protected int НайтиНомер(int длина)
+        {
+            for (int j = 0; j < длина_кораблей.Length; j++)
+                if (длина == длина_кораблей[j])
+                    if (НетКорабля(j))
+                        return j;
+
+            return -1;
+        }
         public void ПоставитьКорабль(int Номер, Program.Точка[] Палуба)
         {
             if (корабль[Номер] != null)
@@ -118,7 +161,7 @@ namespace Морской_Бой
                     ОчиститьТочку(p);
         }
 
-        protected void ОчиститьТочку(Program.Точка t)
+        public void ОчиститьТочку(Program.Точка t)
         {
             if (!НаМоре(t)) return;
             if (Карта_кораблей[t.x, t.y] == -1)

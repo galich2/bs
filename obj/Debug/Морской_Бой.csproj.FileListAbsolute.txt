@@ -11,7 +11,6 @@ D:\projects\bs\bs\bin\Debug\Морской_Бой.exe.config
 D:\projects\bs\bs\bin\Debug\Морской_Бой.exe
 D:\projects\bs\bs\bin\Debug\Морской_Бой.pdb
 D:\projects\bs\bs\obj\Debug\Морской_Бой.csprojAssemblyReference.cache
-D:\projects\bs\bs\obj\Debug\Морской_Бой.MainForm.resources
 D:\projects\bs\bs\obj\Debug\Морской_Бой.Properties.Resources.resources
 D:\projects\bs\bs\obj\Debug\Морской_Бой.csproj.GenerateResource.cache
 D:\projects\bs\bs\obj\Debug\Морской_Бой.exe
@@ -25,3 +24,4 @@ C:\Users\sm-01\Desktop\программирование\bs\bs\obj\Debug\Морс
 C:\Users\sm-01\Desktop\программирование\bs\bs\obj\Debug\Морской_Бой.csproj.GenerateResource.cache
 C:\Users\sm-01\Desktop\программирование\bs\bs\obj\Debug\Морской_Бой.exe
 C:\Users\sm-01\Desktop\программирование\bs\bs\obj\Debug\Морской_Бой.pdb
+D:\projects\bs\bs\obj\Debug\Морской_Бой.FormGame.resources

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Морской_Бой
 {
@@ -192,6 +188,20 @@ namespace Морской_Бой
             ПоставитьКорабль(номер, палуба);
             
             return true;
+        }
+        public void ПоставитьСлучайно()
+        {
+            Сброс();
+            int loop = 100;
+            while (--loop > 0 && создано<Море.Всего_кораблей)
+            {
+                for (int i = 0; i<Море.Всего_кораблей; i++)
+                    if (НетКорабля(i))
+                        ПоставитьСлучайно(i);
+            loop--;
+            }
+            //if (создано < Море.Всего_кораблей)
+                //Сброс();
         }
     }
 }

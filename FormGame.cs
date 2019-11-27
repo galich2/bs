@@ -9,6 +9,7 @@ namespace Морской_Бой
         Редактор sea_comp;
         SeaGrid GridUser;
         SeaGrid GridComp;
+        Mission mission;
 
         enum Mode
         {
@@ -30,6 +31,7 @@ namespace Морской_Бой
             GridUser = new SeaGrid(grid_user);
             GridComp = new SeaGrid(grid_comp);
             ReStart();
+            timer1.Enabled = true;
         }
         private void ReStart()
         {
@@ -48,7 +50,8 @@ namespace Морской_Бой
         }
         private void ShowCompShip(Program.Точка place, int nr)
         {
-            GridComp.ShowShip(place, nr);
+            if(mode == Mode.EditShips)
+                GridComp.ShowShip(place, nr);
         }
         private void ShowUserFight(Program.Точка place, Program.Статус status)
         {
@@ -60,11 +63,14 @@ namespace Морской_Бой
         }
         private void grid_user_MouseUp(object sender, MouseEventArgs e)
         {
+            
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 PlaceShip();
+            grid_user.ClearSelection();
         }
         private void PlaceShip()
         {
+            if (mode != Mode.EditShips) return;
             Program.Точка[] ship = GridUser.GetSelectedCells();
             if (ship == null)
                 return;
@@ -80,13 +86,14 @@ namespace Морской_Бой
             {
                 if (!sea_user.НетКорабля(j))
                     sea_comp.УбратьКорабль(j);
-                buttonStart.Enabled = (sea_user.создано == Море.Всего_кораблей);
+                //buttonStart.Enabled = (sea_user.создано == Море.Всего_кораблей);
             }
         }
         private void grid_user_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 PlaceShip();
+            grid_user.ClearSelection();
         }
         private void FormGame_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -112,15 +119,74 @@ namespace Морской_Бой
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (mode != Mode.EditShips) return;
-            if(sea_user.создано == Море.Всего_кораблей)
+            //if (mode != Mode.EditShips) return;
+            //if(sea_user.создано == Море.Всего_кораблей)
+            //{if(mode == Mode.EditShips)
+            //
+            mode = Mode.PlayUser;
+            sea_comp.ПоставитьСлучайно();
+            mission = new Mission(sea_user);
+                
+            buttonRandom.Visible = false;
+            buttonClear.Visible = false;
+                //buttonStart.Visible = false;
+            //}
+        }
+
+        private void grid_comp_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            grid_comp.ClearSelection();
+            if (mode != Mode.PlayUser) return;
+            Program.Статус status = sea_comp.Выстрел(new Program.Точка(e.ColumnIndex, e.RowIndex));
+            switch (status)
             {
-                sea_comp.ПоставитьСлучайно();
-                mode = Mode.PlayUser;
-                buttonRandom.Visible = false;
-                buttonClear.Visible = false;
-                buttonStart.Visible = false;
+                case Program.Статус.Неизвестно:
+                case Program.Статус.Мимо:
+                    mode = Mode.PlayComp;
+                    break;
+                case Program.Статус.Ранил:
+                case Program.Статус.Убил:
+                    mode = Mode.PlayUser;
+                    break;
+                case Program.Статус.Победил:
+                    mode = Mode.Finish;
+                    WinUser();
+                    break;
+            } 
+        }
+        private void CompFight()
+        {
+            Program.Точка point;
+            Program.Статус status = mission.Fight(out point);
+            switch (status)
+            {
+                case Program.Статус.Неизвестно:
+                case Program.Статус.Мимо:
+                    mode = Mode.PlayUser;
+                    break;
+                case Program.Статус.Ранил:
+                case Program.Статус.Убил:
+                    mode = Mode.PlayComp;
+                    break;
+                case Program.Статус.Победил:
+                    mode = Mode.Finish;
+                    WinComp();
+                    break;
             }
+        }
+        private void WinUser()
+        {
+            MessageBox.Show("Вы выйграли!");
+        }
+        private void WinComp()
+        {
+            MessageBox.Show("Вы проиграли!");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(mode == Mode.PlayComp)
+                CompFight();
         }
     }
 }

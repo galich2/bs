@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGame));
@@ -37,6 +38,7 @@
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonRestart = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.grid_user)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid_comp)).BeginInit();
             this.SuspendLayout();
@@ -95,6 +97,7 @@
             this.grid_comp.ShowEditingIcon = false;
             this.grid_comp.Size = new System.Drawing.Size(266, 279);
             this.grid_comp.TabIndex = 1;
+            this.grid_comp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_comp_CellClick);
             // 
             // buttonRandom
             // 
@@ -140,6 +143,11 @@
             this.buttonRestart.UseVisualStyleBackColor = true;
             this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,7 +165,6 @@
             this.Name = "FormGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Морской бой";
-            //this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FormGame_MouseDoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.grid_user)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid_comp)).EndInit();
@@ -173,6 +180,7 @@
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonRestart;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

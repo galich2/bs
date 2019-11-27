@@ -3,17 +3,17 @@
     public delegate void deShowShip(Program.Точка place, int nr);
     public delegate void deShowFight(Program.Точка place, Program.Статус status);
 
-    class Море
+    public class  Море
     {
         public static Program.Точка Размер_моря = new Program.Точка(10, 10);
         public static int Всего_кораблей = 10;
         public deShowShip ShowShip;
         public deShowFight ShowFight;
-        protected int[,] Карта_кораблей;
+        public int[,] Карта_кораблей;
         public Program.Статус[,] Карта_попаданий;
         public int Расставлено { get; protected set; }
         public int Убито { get; protected set; }
-        protected Корабль[] корабль;
+        public Корабль[] корабль;
         public int создано { get; protected set; }
         public Море()
         {
